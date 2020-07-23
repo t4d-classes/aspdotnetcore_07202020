@@ -1,0 +1,21 @@
+﻿@page "/car-tool"
+
+  <header>
+    <h1>@headerText</h1>
+  </header>
+
+  <main>
+    Some content...
+  </main>
+
+  <footer>
+    <small>&copy; @copyright.Year @companyName</small>
+  </footer>
+
+@code {
+
+  private string headerText = "Car Tool";
+  private DateTime copyright = DateTime.Now;
+  private string companyName = "A Cool Company, Inc.";
+
+}
