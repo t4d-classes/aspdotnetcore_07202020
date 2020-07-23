@@ -17,7 +17,7 @@
 <footer>
     <small>&copy; 2020. A Cool Company, Inc.</small>
 </footer>
-```html
+```
 
 4. Replace the content "Car Tool", "2020", and "A Cool Company, Inc." with variables. Declare variables and assign values to them within the Razor file.
 
