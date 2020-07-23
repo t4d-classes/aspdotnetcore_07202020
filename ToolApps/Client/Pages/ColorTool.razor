@@ -2,9 +2,7 @@
 
 @inject ColorsDataService colorsData
 
-  <header>
-    <h1>@headerText</h1>
-  </header>
+  <ToolHeader HeaderText=@headerText />
 
   <main>
     <ul>
@@ -27,7 +25,7 @@
         <input type="text" id="hexcode-input" @bind="colorForm.Hexcode" />
       </div>
 
-      <button type="button" @onclick="addColor">Add Color</button>
+      <button type="button" @onclick=@addColor>Add Color</button>
     </form>
 
   </main>
