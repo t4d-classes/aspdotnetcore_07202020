@@ -1,21 +1,56 @@
 ﻿@page "/car-tool"
 
-  <header>
-    <h1>@headerText</h1>
-  </header>
+@inject CarsDataService carsData
 
-  <main>
-    Some content...
-  </main>
+<header>
+  <h1>@headerText</h1>
+</header>
 
-  <footer>
-    <small>&copy; @copyright.Year @companyName</small>
-  </footer>
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var car in cars)
+      {
+        <tr>
+          <td>@car.Id</td>
+          <td>@car.Make</td>
+          <td>@car.Model</td>
+          <td>@car.Year</td>
+          <td>@car.Color</td>
+          <td>@car.Price</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</main>
+
+<footer>
+  <small>&copy; @copyright.Year @companyName</small>
+</footer>
 
 @code {
 
   private string headerText = "Car Tool";
   private DateTime copyright = DateTime.Now;
   private string companyName = "A Cool Company, Inc.";
+
+  private IEnumerable<Car> cars;
+
+  protected override void OnInitialized()
+  {
+    cars = carsData.All();
+  }
 
 }

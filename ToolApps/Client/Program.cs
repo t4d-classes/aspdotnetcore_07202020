@@ -20,6 +20,7 @@ namespace ToolApps.Client
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
       builder.Services.AddScoped<ColorsDataService>();
+      builder.Services.AddTransient<CarsDataService>();
 
       await builder.Build().RunAsync();
     }

@@ -15,6 +15,21 @@
         </li>
       }
     </ul>
+
+    <form>
+      <div>
+        <label for="name-input">Name</label>
+        <input type="text" id="name-input" @bind="colorForm.Name" />
+      </div>
+
+      <div>
+        <label for="hexcode-input">Hexcode</label>
+        <input type="text" id="hexcode-input" @bind="colorForm.Hexcode" />
+      </div>
+
+      <button type="button" @onclick="addColor">Add Color</button>
+    </form>
+
   </main>
 
   <footer>
@@ -25,10 +40,23 @@
 
   string headerText = "Color Tool";
 
-  IEnumerable<Color> colors;
+  private IEnumerable<Color> colors;
+
+  private ColorForm colorForm = new ColorForm();
 
   protected override void OnInitialized()
   {
     colors = colorsData.All();
+  }
+
+  private void addColor()
+  {
+    var color = new Color()
+    {
+      Name = colorForm.Name,
+      Hexcode = colorForm.Hexcode,
+    };
+
+    colors = colorsData.Append(color).All();
   }
 }

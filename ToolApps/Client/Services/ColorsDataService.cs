@@ -22,5 +22,12 @@ namespace ToolApps.Client.Services
     {
       return _colors;
     }
+
+    public ColorsDataService Append(Color color)
+    {
+      color.Id = _colors.Count() == 0 ? 1 : _colors.Select(c => c.Id).Max() + 1;
+      _colors.Add(color);
+      return this;
+    }
   }
 }
