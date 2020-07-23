@@ -5,29 +5,15 @@
   <ToolHeader HeaderText=@headerText />
 
   <main>
-    <ul>
-      @foreach(var color in colors)
-      {
-        <li>
-          @color.Id - @color.Name - @color.Hexcode  
-        </li>
-      }
-    </ul>
-
-    <form>
-      <div>
-        <label for="name-input">Name</label>
-        <input type="text" id="name-input" @bind="colorForm.Name" />
-      </div>
-
-      <div>
-        <label for="hexcode-input">Hexcode</label>
-        <input type="text" id="hexcode-input" @bind="colorForm.Hexcode" />
-      </div>
-
-      <button type="button" @onclick=@addColor>Add Color</button>
-    </form>
-
+    <div>
+      Data from Color Form: @dataFromColorForm.Name
+    </div>
+    <ColorList Colors=@colors />
+    <ColorList Colors=@colors />
+    <ColorForm ButtonText="Add Color"
+               OnSubmittedColor="addColor" />
+    <ColorForm ButtonText="Add Color"
+               OnSubmittedColor="addColor" />
   </main>
 
   <footer>
@@ -36,25 +22,19 @@
 
 @code {
 
-  string headerText = "Color Tool";
-
+  private string headerText = "Color Tool";
   private IEnumerable<Color> colors;
 
-  private ColorForm colorForm = new ColorForm();
+  private Color dataFromColorForm = new Color();
 
   protected override void OnInitialized()
   {
     colors = colorsData.All();
   }
 
-  private void addColor()
+  private void addColor(Color color)
   {
-    var color = new Color()
-    {
-      Name = colorForm.Name,
-      Hexcode = colorForm.Hexcode,
-    };
-
-    colors = colorsData.Append(color).All();
+    dataFromColorForm = color;
+    // colors = colorsData.Append(color).All();
   }
 }

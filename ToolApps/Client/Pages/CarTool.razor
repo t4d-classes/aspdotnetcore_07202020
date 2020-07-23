@@ -2,48 +2,17 @@
 
 @inject CarsDataService carsData
 
-<header>
-  <h1>@headerText</h1>
-</header>
+<ToolHeader HeaderText=@headerText />
 
 <main>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Color</th>
-        <th>Price</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var car in cars)
-      {
-        <tr>
-          <td>@car.Id</td>
-          <td>@car.Make</td>
-          <td>@car.Model</td>
-          <td>@car.Year</td>
-          <td>@car.Color</td>
-          <td>@car.Price</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-
+  <CarTable Cars="cars" />
 </main>
 
-<footer>
-  <small>&copy; @copyright.Year @companyName</small>
-</footer>
+<ToolFooter CompanyName=@companyName />
 
 @code {
 
   private string headerText = "Car Tool";
-  private DateTime copyright = DateTime.Now;
   private string companyName = "A Cool Company, Inc.";
 
   private IEnumerable<Car> cars;

@@ -1,0 +1,15 @@
+﻿<ul>
+  @foreach (var color in Colors)
+  {
+    <li>
+      @color.Id - @color.Name - @color.Hexcode
+    </li>
+  }
+</ul>
+
+@code {
+
+  [Parameter]
+  public IEnumerable<Color> Colors { get; set; } = new List<Color>();
+
+}

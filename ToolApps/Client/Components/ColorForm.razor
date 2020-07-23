@@ -1,0 +1,65 @@
+﻿@using ColorFormView = ToolApps.Client.ViewModels.ColorForm;
+
+<form>
+
+   <div>
+     ColorForm Comp: Collected Color Form Name: @collectedColorName
+   </div>
+
+   <div>
+     <label for="name-input">Name</label>
+     @* <input type="text" id="name-input" @bind="colorForm.Name" /> *@
+     <input type="text" id="name-input" @bind-value="colorForm.Name"
+            @bind-value:event="onchange" @oninput="update" />
+   </div>
+
+  <div>
+    <label for="hexcode-input">Hexcode</label>
+    <input type="text" id="hexcode-input" @bind="colorForm.Hexcode" />
+  </div>
+
+  <button type="button" @onclick=@submitColor>@ButtonText</button>
+</form>
+
+
+@code {
+
+  private string collectedColorName { get; set; }
+
+  [Parameter]
+  public string ButtonText { get; set; } = "Submit Color";
+
+  [Parameter]
+  public EventCallback<Color> OnSubmittedColor { get; set; }
+
+  private ColorFormView colorForm = new ColorFormView();
+
+  private async Task update(ChangeEventArgs eventArgs)
+  {
+    collectedColorName = Convert.ToString(eventArgs.Value);
+
+    var color = new Color()
+    {
+      Name = collectedColorName,
+      Hexcode = "",
+    };
+
+    await OnSubmittedColor.InvokeAsync(color);
+
+  }
+
+  private async Task submitColor()
+  {
+    var color = new Color()
+    {
+      Name = colorForm.Name,
+      Hexcode = colorForm.Hexcode,
+    };
+
+    await OnSubmittedColor.InvokeAsync(color);
+
+    colorForm = new ColorFormView();
+  }
+
+
+}
