@@ -1,0 +1,41 @@
+
+Application Solution
+
+- Core (Shared) Project (no dependencies on other projects, all other projects will depend on it)
+    // defining contracts
+    // helpful little utilities
+    - Interfaces
+      - IRepository
+      - Service Interfaces
+      - Model Interfaces
+    - Abstract Classes
+    - Enums
+    - Utility Functions
+
+- Model Project (business layer, depends on Core)
+    // reach out to the data access project to pull in the data needed to populate the model
+    // other business logic related to the model
+    - All Models are coded to an interface from Core
+
+- Data Access Project (data layer, depends on Core, Model, ORM)
+   // reaching out to the data source through the ORM or ADO.NET
+   // DTO, or even mapping from the entity to model, you can use AutoMapper
+
+- Service Project (depends on Core, Data Access, Models)
+    - IRepository access the data, use Dependency Injection to Access the Data Access implementation
+    - For the Actual Service Classes
+      // code the services to interface, use the interface to configure dependency injection
+      - Use IRepository to access data
+      - Service which uses HttpClient to call the Server (for Blazor WebAssembly)
+
+- Web Project (view layer, depends on Core, Services, Model)
+    - Controllers
+      - Use my service to load data models
+      - Never use the Data Access API directly
+    - Views
+      - Generally do not use the models from the Models project to populate a view
+      - Prefer view models to populate the view, and create view models for form data collection
+    - View Models
+    - Within the web project access all service through their interface, except for the di registration part
+    - Access all models through the interface
+    
