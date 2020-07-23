@@ -1,5 +1,7 @@
 ﻿@page "/color-tool"
 
+@inject ColorsDataService colorsData
+
   <header>
     <h1>@headerText</h1>
   </header>
@@ -23,13 +25,10 @@
 
   string headerText = "Color Tool";
 
-  List<Color> colors;
+  IEnumerable<Color> colors;
 
   protected override void OnInitialized()
   {
-    colors = new List<Color>();
-    colors.Add(new Color() { Id = 1, Name = "red", Hexcode = "ff0000" });
-    colors.Add(new Color() { Id = 2, Name = "green", Hexcode = "00ff00" });
-    colors.Add(new Color() { Id = 3, Name = "blue", Hexcode = "0000ff" });
+    colors = colorsData.All();
   }
 }
